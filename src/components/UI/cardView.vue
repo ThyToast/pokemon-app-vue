@@ -36,7 +36,7 @@
           round
           color="primary"
           icon="delete"
-          @click="storeFavorite(pokemon.id)"
+          @click="deleteFavorite(pokemon.id)"
         />
       </q-card-section>
     </div>
@@ -49,7 +49,7 @@ export default {
   props: {
     pokemon: Object,
   },
-  setup() {
+  setup(props, { emit }) {
     var isFavorite = false;
     const storeFavorite = (id) => {
       let list = JSON.parse(localStorage.getItem("favorite"));
@@ -63,9 +63,9 @@ export default {
       }
     };
 
-    // const deleteFavorite = (id) => {
-    //   let list = JSON.parse(localStorage.getItem("favorite"));
-    // };
+    const deleteFavorite = (id) => {
+      emit("delete", id);
+    };
 
     const checkRoute = () => {
       switch (useRoute().name) {
@@ -83,6 +83,7 @@ export default {
 
     return {
       storeFavorite,
+      deleteFavorite,
       isFavorite,
     };
   },
@@ -91,27 +92,27 @@ export default {
 
 <style lang="sass">
 .center
-    display: block
-    margin-left: auto
-    margin-right: auto
-    width: 200
+  display: block
+  margin-left: auto
+  margin-right: auto
+  width: 200px
 
 .my-card
-    display: inline-block
-    width: 100%
-    max-width: 350px
-    margin: 50px
-    border-color: black
-    border-width: 2px
+  display: inline-block
+  width: 100%
+  max-width: 350px
+  margin: 50px
+  border-color: black
+  border-width: 2px
 
 .outline
-    border-color: black
-    border: 2px
+  border-color: black
+  border: 2px
 
 a:hover
-    background-color: lightgrey
+  background-color: lightgrey
 
 a
-    color: black
-    text-decoration: none
+  color: black
+  text-decoration: none
 </style>

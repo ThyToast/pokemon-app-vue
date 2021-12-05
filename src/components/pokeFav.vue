@@ -2,7 +2,7 @@
   <body>
     <div class="row justify-center items-center">
       <div v-for="pokemon in favPokemon" :key="pokemon.id">
-        <cardView :pokemon="pokemon"></cardView>
+        <cardView :pokemon="pokemon" @delete="deletePokemon"></cardView>
       </div>
     </div>
   </body>
@@ -19,13 +19,14 @@ export default {
   },
   setup() {
     const favPokemon = ref();
-    const favList = JSON.parse(localStorage.getItem("favorite"));
+    const favList = ref([]);
 
     const loadFavorite = async () => {
+      favList.value = JSON.parse(localStorage.getItem("favorite"));
       let list = [];
-      for (let index = 0; index < favList.length; index++) {
+      for (let index = 0; index < favList.value.length; index++) {
         await axios
-          .get("https://pokeapi.co/api/v2/pokemon/" + favList[index])
+          .get("https://pokeapi.co/api/v2/pokemon/" + favList.value[index])
           .then((res) => {
             list.push(res.data);
           });
@@ -33,11 +34,26 @@ export default {
       favPokemon.value = list;
     };
 
+    const deletePokemon = (id) => {
+      let list = favList.value;
+      let index = list.findIndex((list) => {
+        return list === id;
+      });
+      if (index != -1) {
+        list.splice(index, 1);
+        favList.value = list;
+        localStorage.setItem("favorite", JSON.stringify(favList.value));
+        loadFavorite();
+        console.log(favList.value);
+      }
+    };
+
     loadFavorite();
     console.log(favPokemon);
 
     return {
       loadFavorite,
+      deletePokemon,
       favPokemon,
     };
   },
