@@ -1,5 +1,10 @@
 <template>
   <body>
+      <router-link to="/">
+      <div class="row button">
+        <q-btn color="primary" icon="home" />
+      </div>
+    </router-link>
     <div class="row justify-center items-center">
       <div v-for="pokemon in favPokemon" :key="pokemon.id">
         <cardView :pokemon="pokemon" @delete="deletePokemon"></cardView>
@@ -66,4 +71,8 @@ export default {
   margin-left: auto
   margin-right: auto
   width: 200
+
+.button
+  justify-content: center
+  margin-bottom: 20px
 </style>

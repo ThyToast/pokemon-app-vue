@@ -4,7 +4,7 @@
   </div>
 
   <router-link to="/favorite"
-    ><h3 class="text-center">Go to favorites</h3></router-link
+    ><h3 class="text-center">Favorites</h3></router-link
   >
 
   <q-input

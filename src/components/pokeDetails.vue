@@ -1,23 +1,36 @@
 <template>
   <body>
+    <router-link to="/">
+      <div class="row button">
+        <q-btn color="primary" icon="home" />
+      </div>
+    </router-link>
     <div class="row button">
       <a
         v-if="pokemon.id > 1"
         :href="
-          $router.resolve({ name: 'Details', params: { id: pokemon.id - 1 } }).href
+          $router.resolve({ name: 'Details', params: { id: pokemon.id - 1 } })
+            .href
         "
       >
-        <q-btn color="primary" icon="navigate_before" @click="getDetail" />
+        <q-btn
+          color="white"
+          text-color="black"
+          icon="navigate_before"
+          @click="getDetail"
+        />
       </a>
 
       <a
         :href="
-          $router.resolve({ name: 'Details', params: { id: pokemon.id + 1 } }).href
+          $router.resolve({ name: 'Details', params: { id: pokemon.id + 1 } })
+            .href
         "
       >
         <q-btn
           class="end"
-          color="primary"
+          text-color="black"
+          color="white"
           icon="navigate_next"
           @click="getDetail"
         />
@@ -85,10 +98,11 @@ export default {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .center
-  display: flex
+  display: block
   width: 50%
 .button
   justify-content: center
+  margin-bottom: 20px
 </style>
