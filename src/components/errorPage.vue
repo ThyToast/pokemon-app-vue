@@ -1,14 +1,11 @@
 <template>
-<h1> Error 404 </h1>
-    
+  <h3 class="text-center">Error 404: Page not found</h3>
 </template>
 
 <script>
-export default {
-    
-}
+export default {};
 </script>
 
-<style>
+<style lang="sass" scoped>
 
 </style>

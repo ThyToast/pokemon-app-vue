@@ -6,6 +6,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import detailsPage from './components/pokeDetails.vue'
 import mainPage from './components/mainPage.vue'
 import favPage from './components/pokeFav.vue'
+import errorPage from './components/errorPage.vue'
 import Vuex from 'vuex'
 
 const app = createApp(App)
@@ -22,6 +23,9 @@ const router = createRouter({
         },
         {
             path: '/favorite', component: favPage, props: true, name: "Favorite"
+        },
+        {
+            path: '/:pathMatch(.*)*' , component: errorPage, name: "Error"
         },
     ]
 })
